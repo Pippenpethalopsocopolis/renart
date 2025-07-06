@@ -1,0 +1,28 @@
+.color-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.yellow-gold, .white-gold, .rose-gold {
+    background-color: #e6ca97; /* Gold color */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.white-gold {
+    background-color: #d8d8d8; /* Lighter color for white gold */
+}
+
+.rose-gold {
+    background-color: #e1a3a8; /* Rose gold color */
+}
+
+.yellow-gold:hover, .white-gold:hover, .rose-gold:hover {
+    outline: 1px solid #000000;
+    outline-offset: 2px;
+    transform: scale(1.1);
+    transition: box-shadow 0.2s, outline 0.2s, transform 0.2s;
+}
