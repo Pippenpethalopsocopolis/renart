@@ -1,15 +1,35 @@
+/* Fonts */
+@font-face {
+    font-family: 'Montserrat Regular';
+    src: url('/fonts/montserat/Montserrat-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Montserrat Medium';
+    src: url('/fonts/montserat/Montserrat-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Avenir Book';
+    src: url('/fonts/avenir/Avenir-Book.ttf') format('truetype');
+}
+/* Fonts */
+
+/* Product Card Styling */
 #title {
     text-align: center;
     margin-top: 5%;
     margin-bottom: 5%;
     font-family: 'Avenir Book';
     font-weight: 100;
-    font-size: 40px;
+    font-size: clamp(24px, 5vw, 45px);
+    padding: 0 20px;
 }
 
 #product-and-swiper-wrapper {
     display: flex;
     align-items: center;
+    padding: 0 10px;
 }
 
 #product-container {
@@ -24,12 +44,15 @@
     margin-bottom: 1%;
     margin-left: 1%;
     margin-right: 1%;
+    flex-shrink: 0;
+    min-width: 200px;
 }
 
 .color-picker {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .yellow-gold, .white-gold, .rose-gold {
@@ -38,8 +61,9 @@
     height: 20px;
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.2s ease ;
+    transition: all 0.2s ease;
     border: none;
+    flex-shrink: 0;
 }
 
 .white-gold {
@@ -64,70 +88,62 @@
 
 .product-price {
     font-family: 'Montserrat Regular';
-    font-size: 15px;
+    font-size: clamp(12px, 2.5vw, 15px);
     margin-top: 2%;
 }
 
 .product-name {
     font-family: 'Montserrat Medium';
-    font-size: 15px;
+    font-size: clamp(12px, 2.5vw, 15px);
     font-weight: 100;
     margin-bottom: 0;
 }
 
 .product-image {
-    width: 290px;
+    width: 100%;
+    max-width: 290px;
+    min-width: 200px;
+    height: auto;
     clip-path: inset(0 10% 0 10% round 20px);
-    transform: translateX(-10%); /* This must be equal to taken clip from the left or right side of the image */
+    transform: translateX(-10%); /* This depend on clip size change it if you change clip size */
 }
 
 .arrow {
-    font-size: 30px;
+    font-size: clamp(20px, 4vw, 30px);
     cursor: pointer;
     margin-left: 1%;
     margin-right: 1%;
     margin-bottom: 10%;
+    user-select: none;
 }
 
 .color-choice {
     font-family: 'Avenir Book';
-    font-size: 12px;
+    font-size: clamp(10px, 2vw, 12px);
     margin-bottom: 0;
 }
 
 .star-rating {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .star {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
     margin-right: 2px;
     cursor: default;
 }
 
 .star-rating-text {
     margin-left: 8px;
-    font-size: 14px;
+    font-size: clamp(11px, 2vw, 14px);
     margin-top: 2%;
     font-family: "Avenir Book";
 }
+/* Product Card Styling */
 
-@font-face {
-    font-family: 'Montserrat Regular';
-    src: url('/fonts/montserat/Montserrat-Regular.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Montserrat Medium';
-    src: url('/fonts/montserat/Montserrat-Medium.otf') format('opentype');
-}
-
-@font-face {
-    font-family: 'Avenir Book';
-    src: url('/fonts/avenir/Avenir-Book.ttf') format('truetype');
-}
-
+/* Scrollbar */
 ::-webkit-scrollbar {
     width: 12px;
     height: 12px;
@@ -156,32 +172,124 @@
         1px 1px 3px rgba(0, 0, 0, 0.4),
         inset 1px 1px 2px rgba(255, 255, 255, 0.4);
 }
+/* Scrollbar */
 
-::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+/* Responsive */
+@media (max-width: 768px) {
+    #title {
+        margin-top: 8%;
+        margin-bottom: 8%;
+        padding: 0 15px;
+    }
+    
+    #product-and-swiper-wrapper {
+        padding: 0 5px;
+    }
+    
+    #product-container {
+        gap: 3%;
+        padding: 0 5px;
+    }
+    
+    .product {
+        min-width: 180px;
+        margin-bottom: 2%;
+    }
+    
+    .product-image {
+        min-width: 180px;
+        clip-path: inset(0 5% 0 5% round 15px);
+        transform: translateX(-5%);
+    }
+    
+    .arrow {
+        margin-bottom: 15%;
+        padding: 10px;
+    }
+    
+    .color-picker {
+        gap: 8px;
+        justify-content: center;
+    }
+    
+    .yellow-gold, .white-gold, .rose-gold {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .star-rating {
+        justify-content: center;
+    }
+    
+    .star-rating-text {
+        margin-left: 4px;
+    }
 }
 
-::-webkit-scrollbar-track {
-    background: #e0e0e0;
-    border-radius: 6px;
-    box-shadow:
-        inset 2px 2px 4px rgba(0, 0, 0, 0.2),
-        inset -1px -1px 2px rgba(255, 255, 255, 0.8);
-    border: 1px solid #ccc;
+@media (min-width: 769px) and (max-width: 1024px) {
+    #title {
+        font-size: 35px;
+    }
+    
+    .product {
+        min-width: 220px;
+    }
+    
+    .product-image {
+        min-width: 220px;
+    }
+    
+    .arrow {
+        font-size: 26px;
+    }
 }
 
-::-webkit-scrollbar-thumb {
-    background: rgb(193, 193, 193);
-    border-radius: 6px;
-    box-shadow: 
-        1px 1px 2px rgba(0, 0, 0, 0.3),
-        inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+@media (min-width: 1200px) {
+    #product-container {
+        gap: 4%;
+    }
+    
+    .product {
+        min-width: 280px;
+    }
+    
+    .product-image {
+        min-width: 280px;
+    }
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(145deg, #777, #555);
-    box-shadow: 
-        1px 1px 3px rgba(0, 0, 0, 0.4),
-        inset 1px 1px 2px rgba(255, 255, 255, 0.4);
+@media (hover: none) and (pointer: coarse) {
+    .yellow-gold:hover, .white-gold:hover, .rose-gold:hover {
+        outline: none;
+        transform: none;
+    }
+    
+    .yellow-gold:active, .white-gold:active, .rose-gold:active {
+        outline: 2px solid #000000;
+        outline-offset: 2px;
+        transform: scale(1.1);
+    }
+    
+    .arrow {
+        padding: 15px;
+        margin: 15px;
+    }
 }
+
+@media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #c0c0c0;
+        border-radius: 4px;
+    }
+}
+/* Responsive */
