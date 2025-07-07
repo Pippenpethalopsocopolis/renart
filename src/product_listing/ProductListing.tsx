@@ -146,9 +146,9 @@ function ProductListing() {
                                 <p className='product-price'>${product.price} USD</p>
 
                                 <div className='color-picker'>
-                                    <button className='yellow-gold' onClick={() => setColor(index, 'yellow')} ></button>
-                                    <button className='white-gold' onClick={() => setColor(index, 'white')} ></button>
-                                    <button className='rose-gold' onClick={() => setColor(index, 'rose')} ></button>
+                                    <button className='yellow-gold' onClick={() => setColor(index, 'yellow')} role='button' ></button>
+                                    <button className='white-gold' onClick={() => setColor(index, 'white')} role='button' ></button>
+                                    <button className='rose-gold' onClick={() => setColor(index, 'rose')} role='button' ></button>
                                 </div>
 
                                 <p className='color-choice'>

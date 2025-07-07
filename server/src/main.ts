@@ -5,14 +5,14 @@ import cors from 'cors';
 // Route imports
 import api from './routes/api/api.js';
 
-const PORT = 8080;
+const PORT = process.env.SERVER_PORT;
 
 const app = express();
 const server = createServer(app);
 
 // CORS configuration
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: `http://localhost:${process.env.CLIENT_PORT}`,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
