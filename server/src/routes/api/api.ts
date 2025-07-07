@@ -5,7 +5,7 @@ import products from '../../../data/products.json' with { type: 'json' };
 
 const router = express.Router();
 
-router.get('/products', async (req: Request, res: Response): Promise<any> => {
+router.get('/products', async (req: Request, res: Response): Promise<void> => {
     try {
         /*const response = await fetch("https://api.metalpriceapi.com/v1/latest?api_key=7f539eca690b0d394ffa2c501a59d6ad&base=XAU&currencies=USD")
         
@@ -17,7 +17,8 @@ router.get('/products', async (req: Request, res: Response): Promise<any> => {
 
         if(data.error) {
             console.error('API Error:', data.error);
-            return res.status(500).json({ error: 'Failed to fetch product data' });
+            res.status(500).json({ error: 'Failed to fetch product data' });
+            return;
         }*/
 
         // Since unit choosing is paid in the api, i converted it manually
@@ -41,7 +42,7 @@ router.get('/products', async (req: Request, res: Response): Promise<any> => {
             product['price'] = ((product.popularityScore + 1) * product.weight * data.rates.USD).toFixed(2);
         })
 
-        return res.json({
+        res.json({
             products,
         });
     }

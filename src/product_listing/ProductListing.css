@@ -1,3 +1,9 @@
+#product-container {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+}
+
 .color-picker {
     display: flex;
     align-items: center;
@@ -5,24 +11,59 @@
 }
 
 .yellow-gold, .white-gold, .rose-gold {
-    background-color: #e6ca97; /* Gold color */
+    background-color: #e6ca97;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     cursor: pointer;
+    transition: all 0.2s ease ;
+    border: none;
 }
 
 .white-gold {
-    background-color: #d8d8d8; /* Lighter color for white gold */
+    background-color: #d8d8d8;
 }
 
 .rose-gold {
-    background-color: #e1a3a8; /* Rose gold color */
+    background-color: #e1a3a8;
 }
 
 .yellow-gold:hover, .white-gold:hover, .rose-gold:hover {
     outline: 1px solid #000000;
     outline-offset: 2px;
     transform: scale(1.1);
-    transition: box-shadow 0.2s, outline 0.2s, transform 0.2s;
+}
+
+.yellow-gold:focus, .white-gold:focus, .rose-gold:focus {
+    outline: 1px solid #000000;
+    outline-offset: 2px;
+    transform: scale(1.1);
+}
+
+.product-price {
+    font-family: 'Montserrat Regular';
+    font-size: 15px;
+}
+
+.product-name {
+    font-family: 'Montserrat Medium';
+    font-size: 15px;
+}
+
+.product-image {
+    width: 300px;
+    clip-path: inset(0 10% 0 10% round 20px);
+    transform: translateX(-10%); /* This must be equal to taken clip from the left or right side of the image */
+}
+
+@font-face {
+    font-family: 'Montserrat Regular';
+    src: url('/fonts/montserat/Montserrat-Regular.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat Medium';
+    src: url('/fonts/montserat/Montserrat-Medium.otf') format('opentype');
+    font-style: normal;
 }
