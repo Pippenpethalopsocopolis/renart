@@ -1,4 +1,6 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 import './ProductListing.css';
 
@@ -7,6 +9,7 @@ interface Product {
     name: string;
     price: number;
     images: Images;
+    popularityScore: number;
 }
 
 // Defining properties of an object so also use interface
@@ -18,8 +21,9 @@ interface Images {
 
 function ProductListing() {
     const [products, setProducts] = useState<Product[]>([]);
-
     const [selectedColors, setSelectedColors] = useState<string[]>([]);
+
+    const productContainer = useRef<HTMLDivElement>(null);
 
     // Function to keep track of user's color choice
     function setColor(index: number, color: string) {
@@ -46,6 +50,46 @@ function ProductListing() {
         }
     }
 
+    // Set scrolling amount to the offsetWidth so it swipes exactly to next products that is out of view.
+    // Set negative value to swipe left, positive value to swipe right.
+    function swipeLeft() {
+        productContainer.current?.scrollBy({
+            left: -productContainer.current.offsetWidth,
+            behavior: 'smooth'
+        });
+    }
+
+    function swipeRight() {
+        productContainer.current?.scrollBy({
+            left: productContainer.current.offsetWidth,
+            behavior: 'smooth'
+        });
+    }
+
+    // If mouse wheel moved to top swipe left, if wheel moved to bottom swipe right.
+    function handleWheel(event: WheelEvent) {
+        event.preventDefault();
+        
+        if(event.deltaY < 0) {
+            swipeLeft();
+        }
+        else if(event.deltaY > 0) {
+            swipeRight();
+        }
+    }
+
+    // Calculate stars based on product.popularityScore
+    function fillStars(product: Product) {
+        const stars = 5;
+        const score = typeof product.popularityScore === 'number' ? product.popularityScore : 0;
+        const rating = Math.round(score * stars * 10) / 10;
+        const totalRating = score * stars;
+        const fullStars = Math.floor(totalRating);
+        const partialFill = totalRating - fullStars;
+
+        return {rating, partialFill, fullStars, stars}
+    }
+
     // Get product list from server
     useEffect(() => {
         fetch('http://localhost:8080/api/products', {
@@ -65,31 +109,133 @@ function ProductListing() {
         })
     }, []);
 
+    // Add wheel event listener when component mounts
+    useEffect(() => {
+        const container = productContainer.current;
+        
+        if (container) {
+            container.addEventListener('wheel', handleWheel, { passive: false });
+            
+            // Cleanup function to remove event listener
+            return () => {
+                container.removeEventListener('wheel', handleWheel);
+            };
+        }
+    }, []);
+
     return (
-        <div id='product-container'>
-            {products.map((product, index) => {
-                const imageSrc = imageSource(product, index);
+        <>
+            <h1 id='title'>Product List</h1>
 
-                return (
-                    <div key={index} className="product">
-                        <img
-                            src={imageSrc}
-                            alt="product-image"
-                            className='product-image'
-                        />
+            <div id='product-and-swiper-wrapper' >
+                <ArrowBackIosNewIcon className='arrow' onClick={swipeLeft} />
 
-                        <h2 className='product-name'>{product.name}</h2>
-                        <p className='product-price'>Price: {product.price}</p>
-                        <div className='color-picker'>
-                            <button className='yellow-gold' onClick={() => setColor(index, 'yellow')} ></button>
-                            <button className='white-gold' onClick={() => setColor(index, 'white')} ></button>
-                            <button className='rose-gold' onClick={() => setColor(index, 'rose')} ></button>
-                        </div>
-                    </div>
-                )
-            })}
-        </div>
+                <div id='product-container' ref={productContainer}>
+                    {products.map((product, index) => {
+                        const imageSrc = imageSource(product, index);
+
+                        return (
+                            <div key={index} className="product" >
+                                <img
+                                    src={imageSrc}
+                                    alt="product-image"
+                                    className='product-image'
+                                />
+
+                                <h2 className='product-name'>{product.name}</h2>
+                                <p className='product-price'>${product.price} USD</p>
+
+                                <div className='color-picker'>
+                                    <button className='yellow-gold' onClick={() => setColor(index, 'yellow')} ></button>
+                                    <button className='white-gold' onClick={() => setColor(index, 'white')} ></button>
+                                    <button className='rose-gold' onClick={() => setColor(index, 'rose')} ></button>
+                                </div>
+
+                                <p className='color-choice'>
+                                    {
+                                        selectedColors[index] === 'yellow' ? "Yellow Gold"
+                                        : selectedColors[index] === 'white' ? "White Gold"
+                                        : selectedColors[index] === 'rose' ? "Rose Gold"
+                                        : "Yellow Gold"
+                                    }
+                                </p>
+                                
+                                {/* Star Rating */}
+                                <div className="star-rating">
+                                    {(() => {
+                                        const {rating, partialFill, fullStars, stars} = fillStars(product);
+                                    
+                                        return (
+                                            <>
+                                                {Array.from({ length: stars }).map((_, i) => {
+                                                    if(i < fullStars) {
+                                                        // Full star
+                                                        return (
+                                                            <span
+                                                                key={i}
+                                                                className="star"
+                                                                style={{ color: '#E6CA97' }}
+                                                            >
+                                                                ★
+                                                            </span>
+                                                        );
+                                                    }
+                                                    else if(i === fullStars && partialFill > 0) {
+                                                        // Partially filled star
+                                                        return (
+                                                            <span
+                                                                key={i}
+                                                                className="star"
+                                                                style={{ 
+                                                                    position: 'relative',
+                                                                    display: 'inline-block'
+                                                                }}
+                                                            >
+                                                                <span style={{ color: '#E0E0E0' }}>★</span>
+                                                                <span 
+                                                                    style={{ 
+                                                                        color: '#E6CA97',
+                                                                        position: 'absolute',
+                                                                        left: 0,
+                                                                        top: 0,
+                                                                        width: `${partialFill * 100}%`,
+                                                                        overflow: 'hidden'
+                                                                    }}
+                                                                >
+                                                                    ★
+                                                                </span>
+                                                            </span>
+                                                        );
+                                                    }
+                                                    else {
+                                                        // Empty star
+                                                        return (
+                                                            <span
+                                                                key={i}
+                                                                className="star"
+                                                                style={{ color: '#E0E0E0' }}
+                                                            >
+                                                                ★
+                                                            </span>
+                                                        );
+                                                    }
+                                                })}
+                                                <span className="star-rating-text">
+                                                    {rating}/5
+                                                </span>
+                                            </>
+                                        );
+                                    })()}
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+
+                <ArrowForwardIosIcon className='arrow' onClick={swipeRight} />
+            </div>
+        </>
     )
 }
 
-export default ProductListing
+export default ProductListing;

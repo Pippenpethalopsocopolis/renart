@@ -1,7 +1,29 @@
+#title {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-family: 'Avenir Book';
+    font-weight: 100;
+    font-size: 40px;
+}
+
+#product-and-swiper-wrapper {
+    display: flex;
+    align-items: center;
+}
+
 #product-container {
     display: flex;
     align-items: center;
-    min-height: 100vh;
+    gap: 5%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.product {
+    margin-bottom: 1%;
+    margin-left: 1%;
+    margin-right: 1%;
 }
 
 .color-picker {
@@ -43,27 +65,123 @@
 .product-price {
     font-family: 'Montserrat Regular';
     font-size: 15px;
+    margin-top: 2%;
 }
 
 .product-name {
     font-family: 'Montserrat Medium';
     font-size: 15px;
+    font-weight: 100;
+    margin-bottom: 0;
 }
 
 .product-image {
-    width: 300px;
+    width: 290px;
     clip-path: inset(0 10% 0 10% round 20px);
     transform: translateX(-10%); /* This must be equal to taken clip from the left or right side of the image */
+}
+
+.arrow {
+    font-size: 30px;
+    cursor: pointer;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 10%;
+}
+
+.color-choice {
+    font-family: 'Avenir Book';
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+.star-rating {
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    font-size: 1.5rem;
+    margin-right: 2px;
+    cursor: default;
+}
+
+.star-rating-text {
+    margin-left: 8px;
+    font-size: 14px;
+    margin-top: 2%;
+    font-family: "Avenir Book";
 }
 
 @font-face {
     font-family: 'Montserrat Regular';
     src: url('/fonts/montserat/Montserrat-Regular.ttf') format('truetype');
-    font-style: normal;
 }
 
 @font-face {
     font-family: 'Montserrat Medium';
     src: url('/fonts/montserat/Montserrat-Medium.otf') format('opentype');
-    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Avenir Book';
+    src: url('/fonts/avenir/Avenir-Book.ttf') format('truetype');
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #e0e0e0;
+    border-radius: 6px;
+    box-shadow: 
+        inset 2px 2px 4px rgba(0, 0, 0, 0.2),
+        inset -1px -1px 2px rgba(255, 255, 255, 0.8);
+    border: 1px solid #ccc;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(193, 193, 193);
+    border-radius: 6px;
+    box-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.3),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(145deg, #777, #555);
+    box-shadow: 
+        1px 1px 3px rgba(0, 0, 0, 0.4),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #e0e0e0;
+    border-radius: 6px;
+    box-shadow:
+        inset 2px 2px 4px rgba(0, 0, 0, 0.2),
+        inset -1px -1px 2px rgba(255, 255, 255, 0.8);
+    border: 1px solid #ccc;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(193, 193, 193);
+    border-radius: 6px;
+    box-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.3),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(145deg, #777, #555);
+    box-shadow: 
+        1px 1px 3px rgba(0, 0, 0, 0.4),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.4);
 }
