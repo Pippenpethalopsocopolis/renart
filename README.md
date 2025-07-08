@@ -16,7 +16,7 @@ Enviroment variables are needed for this project to work properly.
 
 API_KEY => For MetalpriceAPI key.
 
-SERVER_PORT => For server port.
+PORT => For server port. Default is 8080
 
 ## Website Link
 
