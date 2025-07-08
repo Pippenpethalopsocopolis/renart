@@ -12,7 +12,7 @@ const server = createServer(app);
 
 // CORS configuration
 app.use(cors({
-    origin: process.env.ORIGIN,
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));

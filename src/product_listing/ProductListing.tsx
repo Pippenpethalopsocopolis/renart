@@ -37,16 +37,15 @@ function ProductListing() {
     // Function to determine image source depending on user's color choice
     function imageSource(product: Product, index: number) {
         const selectedColor = selectedColors[index];
-        let imageSrc = '';
 
         if(selectedColor === 'white') {
-            return imageSrc = product.images.white;
+            return product.images.white;
         }
         else if(selectedColor === 'rose') {
-            return imageSrc = product.images.rose;
+            return product.images.rose;
         }
         else {
-            return imageSrc = product.images.yellow; // Default color is yellow
+            return product.images.yellow; // Default color is yellow
         }
     }
 

@@ -17,5 +17,3 @@ Enviroment variables are needed for this project to work properly.
 API_KEY => For MetalpriceAPI key.
 
 SERVER_PORT => For server port.
-
-ORIGIN => For the cors settings. Write your website address here.
