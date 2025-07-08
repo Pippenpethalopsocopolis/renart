@@ -91,7 +91,7 @@ function ProductListing() {
 
     // Get product list from server
     useEffect(() => {
-        fetch('http://localhost:8080/api/products', {
+        fetch('https://renart-amel.onrender.com/api/products', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
