@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",
-    "postinstall": "cd ../src && npm install && npm run build",
-    "start": "node index.js"
+    "start": "node dist/src/main.js"
   },
   "pre-commit": [
     "ts.check",
