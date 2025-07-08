@@ -1,14 +1,16 @@
 import express from 'express';
 import { createServer } from 'http';
 import cors from 'cors';
+import dotenv from 'dotenv';
 // Route imports
 import api from './routes/api/api.js';
+dotenv.config();
 const PORT = process.env.SERVER_PORT;
 const app = express();
 const server = createServer(app);
 // CORS configuration
 app.use(cors({
-    origin: process.env.ORIGIN,
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));

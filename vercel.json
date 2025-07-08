@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "builds": [{"src": "./server/dist/src/main.js", "use": "@vercel/node", "config": { "includeFiles": ["server/dist/**"] }}],
+    "builds": [{"src": "server/dist/src/main.js", "use": "@vercel/node", "config": { "includeFiles": ["server/dist/**"] }}],
     "routes": [{"src": "/(.*)", "dest": "/server/dist/src/main.js"}],
     "buildCommand": "npm install --prefix server && npm install && npm run build --prefix server && npm run build"
 }
