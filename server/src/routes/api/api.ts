@@ -8,7 +8,7 @@ dotenv.config();
 
 router.get('/products', async (req: Request, res: Response): Promise<void> => {
     try {
-        const response = await fetch(`https://api.metalpriceapi.com/v1/latest?api_key=${process.env.API_KEY}&base=XAU&currencies=USD`)
+        const response = await fetch(`https://api.metalpriceapi.com/v1/latest?api_key=7f539eca690b0d394ffa2c501a59d6ad&base=XAU&currencies=USD`)
         
         if (!response.ok) {
             throw new Error(`API request failed with status ${response.status}`);

@@ -8,7 +8,7 @@ import api from './routes/api/api.js';
 
 dotenv.config();
 
-const PORT = process.env.SERVER_PORT;
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 const server = createServer(app);
